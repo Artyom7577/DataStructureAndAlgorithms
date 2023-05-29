@@ -1,5 +1,8 @@
 package treenode.bstree;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
@@ -284,6 +287,24 @@ public class BSTree {
         return false;
     }
 
+    public static void saveBinarySearchTreeToFile(Node root , String filePath) {
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            saveNodeToFile(root, writer);
+        } catch (IOException e) {
+            System.out.println("An error occurred while saving the binary search tree to file: " + e.getMessage());
+        }
+    }
+    private static void saveNodeToFile(Node node, BufferedWriter writer) throws IOException {
+        if (node == null) {
+            return;
+        }
+        writer.write(Integer.toString(node.key));
+        writer.newLine();
+
+        saveNodeToFile(node.left, writer);
+        saveNodeToFile(node.right, writer);
+    }
+
     public static void main(String[] args) {
         BSTree bst = new BSTree();
 
@@ -310,7 +331,6 @@ public class BSTree {
         System.out.println("\nKey 50 found in BST:" + ret_val);
         ret_val = bst.search(12);
         System.out.println("\nKey 12 found in BST:" + ret_val);
-
     }
 }
 
