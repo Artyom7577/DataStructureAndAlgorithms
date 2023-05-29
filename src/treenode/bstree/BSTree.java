@@ -293,6 +293,7 @@ public class BSTree {
         } catch (IOException e) {
             System.out.println("An error occurred while saving the binary search tree to file: " + e.getMessage());
         }
+
     }
     private static void saveNodeToFile(Node node, BufferedWriter writer) throws IOException {
         if (node == null) {
